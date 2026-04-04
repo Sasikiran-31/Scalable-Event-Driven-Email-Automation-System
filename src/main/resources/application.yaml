@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: kafkaApplication
+
+  threads:
+    virtual:
+      enabled: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all #Ensures Zero Message Loss
+
+    consumer:
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "org.example.kafkaapplication.PayLoad_DTO"
+      group-id: "email-service"
+
+    listener:
+      concurrency: 4
+      ack-mode: manual_immediate
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+logging:
+  pattern:
+    console: '{"timestamp":"%d{ISO8601}","level":"%level","thread":"%thread","correlationId":"%X{correlationId}","logger":"%logger","message":"%msg"}%n'
+
+server:
+  port: 8080
