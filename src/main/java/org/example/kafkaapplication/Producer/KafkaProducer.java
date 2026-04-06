@@ -27,7 +27,7 @@ public class KafkaProducer {
     public void Notify(User user, EventType eventType) {
         String correlationId = UUID.randomUUID().toString();
         String eventId = UUID.randomUUID().toString();
-        Map<Long, User> payload = Map.of(user.getUserId(), user);
+        Map<String, User> payload = Map.of(user.getUserId(), user);
         kafkaTemplate.send(eventType.getTopic(), new Event(eventId, correlationId, eventType, payload, LocalDateTime.now()));
     }
 

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 /**
  * Model of the User
  */
@@ -12,16 +14,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class User {
-    private static long userIdAutoIncr;
 
-    private long userId;
     private String emailId;
     private String userName;
     private CustomerType customerType;
+    private String userId;
 
     public User(String emailId, String userName,  CustomerType customerType) {
-        userIdAutoIncr++;
-        this.userId = userIdAutoIncr;
+        this.userId = UUID.randomUUID().toString();
         this.emailId = emailId;
         this.userName = userName;
         this.customerType = customerType;

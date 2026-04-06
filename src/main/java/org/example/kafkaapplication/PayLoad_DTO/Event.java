@@ -13,7 +13,7 @@ public record Event(
         String eventId,
         String correlationId,
         EventType event_type,
-        Map<Long, User> payload,
+        Map<String, User> payload,
         LocalDateTime timestamp
 
 ) {

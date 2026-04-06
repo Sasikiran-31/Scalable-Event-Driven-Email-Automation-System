@@ -49,7 +49,7 @@ class KafkaSystemIntegrationTest extends BaseIntegrationTest {
     void shouldProcessOnlyOnce_WhenDuplicateEventReceived() throws InterruptedException {
         String eventId = "idempotency-test-" + UUID.randomUUID(); // Unique ID
         User user = new User("test@datumart.com", "Tester", CustomerType.PRO);
-        Event event = new Event(eventId, "trace-1", EventType.ORDER, Map.of(1L, user), LocalDateTime.now());
+        Event event = new Event(eventId, "trace-1", EventType.ORDER, Map.of(String.valueOf(1L), user), LocalDateTime.now());
 
         doNothing().when(notificationService).sendEmail(any());
 
