@@ -17,6 +17,42 @@ This project is a high-performance email automation system built with **Spring B
 * **Consumer**: An acknowledgment-aware listener that manages Redis locks and manual offsets to guarantee at-least-once delivery without duplicates.
 * **Email Templates**: Decoupled template logic for different event types, including Signups, Orders, and Trial Expirations.
 
+## Project Structure
+```
+Scalable-Event-Driven-Email-Automation-System/
+├── src/main/java/org/example/kafkaapplication/
+│   ├── Config/
+│   │   ├── KafkaConsumerConfig.java    # Virtual Thread & Manual Ack setup
+│   │   └── KafkaTopicConfig.java       # Topic definitions (signup, order, trial)
+│   ├── Consumer/
+│   │   ├── KafkaListeners.java         # Main logic (Idempotency & Retries)
+│   │   └── DlqReplayService.java       # Manual recovery from DLT topics
+│   ├── Producer/
+│   │   └── KafkaProducer.java          # Event generation with Correlation IDs
+│   ├── NotificationService/
+│   │   └── NotificationService.java    # Simulated SMTP dispatch logic
+│   ├── Service/
+│   │   └── MetricsService.java         # Real-time event tracking (AtomicLong)
+│   ├── controller/
+│   │   ├── DlqController.java          # API to start/stop DLQ replay
+│   │   └── MetricsController.java       # API to view system health/stats
+│   ├── EmailTemplates/                 # Strategy pattern for email content
+│   │   ├── EmailTemplate.java
+│   │   ├── SignupTemplate.java
+│   │   ├── OrderTemplate.java
+│   │   └── TrialExpirationTemplate.java
+│   ├── Model/                          # Core Domain Entities (User, CustomerType)
+│   └── PayLoad_DTO/                    # Data Transfer Objects (Event, EventType)
+├── src/main/resources/
+│   └── application.yaml                # Kafka & Redis connection settings
+├── src/test/java/org/example/kafkaapplication/
+│   ├── BaseIntegrationTest.java        # Testcontainers (Kafka/Redis) setup
+│   └── Consumer/
+│       └── KafkaSystemIntegrationTest.java # Idempotency & Stress tests
+├── docker-compose.yml                  # Infrastructure orchestration
+└── pom.xml                             # Project dependencies and build config
+```
+
 ## 🛠️ Getting Started
 
 ### Prerequisites
