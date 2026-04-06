@@ -28,7 +28,7 @@ public record Event(
                 '}';
     }
 
-    public User getUser(long id) {
+    public User getUser(String id) {
         return payload.get(id);
     }
 }

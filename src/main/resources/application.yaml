@@ -13,6 +13,9 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       acks: all #Ensures Zero Message Loss
       retries: 3
+      properties:
+        enable.idempotence: true
+
 
     consumer:
       auto-offset-reset: earliest
