@@ -18,7 +18,7 @@ public class NotificationService {
             throw new RuntimeException(e);
         }
 
-        if (System.getProperty("test.mode") == null && Math.random() < 0.80) {
+        if (System.getProperty("test.mode") == null && Math.random() < 0.30) {
             throw new RuntimeException("Simulated SMTP Network Timeout");
         }
 

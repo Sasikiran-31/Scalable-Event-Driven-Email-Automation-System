@@ -36,7 +36,7 @@ public class KafkaApplication {
         return args -> {
 
             int totalMessages = 100;   // load size
-            int concurrency = 2;           // number of producer threads
+            int concurrency = 10;           // number of producer threads
 
             try (ExecutorService executor = Executors.newFixedThreadPool(concurrency)) {
 
