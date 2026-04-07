@@ -25,5 +25,8 @@ public class NotificationService {
         User user = event.payload().values().iterator().next();
         String content = event.event_type().getEmailTemplate().sendEmail(user.getUserName());
 //        System.out.println("Sending email to " + user.getUserName() + " with content " + content);
+        // Notification Call
+
+        /// Scheduler (call kafka)-> kafka -> SendEmail
     }
 }

@@ -35,8 +35,8 @@ public class KafkaApplication {
     CommandLineRunner throughputTest(KafkaProducer producer) {
         return args -> {
 
-            int totalMessages = 100;   // load size
-            int concurrency = 10;           // number of producer threads
+            int totalMessages = 1000;   // load size
+            int concurrency = 8;           // number of producer threads
 
             try (ExecutorService executor = Executors.newFixedThreadPool(concurrency)) {
 
@@ -55,7 +55,9 @@ public class KafkaApplication {
                                     "sasi",
                                     CustomerType.FREE
                             );
-
+                            
+                            // Introducing duplicate messages to test Idempotency
+                            producer.Notify(user, EventType.ORDER);
                             producer.Notify(user, EventType.ORDER);
 
                         } finally {
