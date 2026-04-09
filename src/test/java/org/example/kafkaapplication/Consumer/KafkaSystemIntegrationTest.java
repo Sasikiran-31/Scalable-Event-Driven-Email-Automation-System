@@ -8,7 +8,7 @@ import org.example.kafkaapplication.PayLoad_DTO.Event;
 import org.example.kafkaapplication.PayLoad_DTO.EventType;
 import org.example.kafkaapplication.Producer.KafkaProducer;
 import org.example.kafkaapplication.Service.MetricsService;
-import org.example.kafkaapplication.controller.DlqController;
+import org.example.kafkaapplication.Controller.DlqController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;

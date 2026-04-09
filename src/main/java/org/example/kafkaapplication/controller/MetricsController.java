@@ -1,4 +1,4 @@
-package org.example.kafkaapplication.controller;
+package org.example.kafkaapplication.Controller;
 
 import org.example.kafkaapplication.Service.MetricsService;
 import org.springframework.beans.factory.annotation.Autowired;

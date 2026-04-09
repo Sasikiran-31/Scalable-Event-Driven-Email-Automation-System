@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.UUID;
 
-
 /**
  * The Kafka Producer logic
  */
@@ -27,8 +26,15 @@ public class KafkaProducer {
     public void Notify(User user, EventType eventType) {
         String correlationId = UUID.randomUUID().toString();
         String eventId = eventType.name() + ":" + user.getUserId();
+        // ORDER:sre1
+        // Signup:sre1
+
+        // interface -> notify(Object obj, EventType type);
+
         Map<String, User> payload = Map.of(user.getUserId(), user);
-        kafkaTemplate.send(eventType.getTopic(), new Event(eventId, correlationId, eventType, payload, LocalDateTime.now()));
+        // Temporal as Wrapper -> calls notify(User user, EventType type);
+        kafkaTemplate.send(eventType.getTopic(),
+                new Event(eventId, correlationId, eventType, payload, LocalDateTime.now()));
     }
 
 }

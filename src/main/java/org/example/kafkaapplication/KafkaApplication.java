@@ -1,6 +1,5 @@
 package org.example.kafkaapplication;
 
-import org.apache.kafka.clients.admin.NewTopic;
 import org.example.kafkaapplication.Model.CustomerType;
 import org.example.kafkaapplication.Model.User;
 import org.example.kafkaapplication.PayLoad_DTO.EventType;
@@ -8,15 +7,8 @@ import org.example.kafkaapplication.Producer.KafkaProducer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.config.TopicBuilder;
-import org.springframework.kafka.core.KafkaTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -57,7 +49,6 @@ public class KafkaApplication {
                             );
                             
                             // Introducing duplicate messages to test Idempotency
-                            producer.Notify(user, EventType.ORDER);
                             producer.Notify(user, EventType.ORDER);
 
                         } finally {
